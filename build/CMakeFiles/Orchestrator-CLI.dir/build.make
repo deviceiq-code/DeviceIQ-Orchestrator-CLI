@@ -83,24 +83,10 @@ CMakeFiles/Orchestrator-CLI.dir/src/CommandLineParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Orchestrator-CLI.dir/src/CommandLineParser.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/CommandLineParser.cpp -o CMakeFiles/Orchestrator-CLI.dir/src/CommandLineParser.cpp.s
 
-CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o: CMakeFiles/Orchestrator-CLI.dir/flags.make
-CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o: /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/Log.cpp
-CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o: CMakeFiles/Orchestrator-CLI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o -MF CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o.d -o CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o -c /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/Log.cpp
-
-CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/Log.cpp > CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.i
-
-CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/Log.cpp -o CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.s
-
 CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o: CMakeFiles/Orchestrator-CLI.dir/flags.make
 CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o: /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/OrchestratorCLI.cpp
 CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o: CMakeFiles/Orchestrator-CLI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o -MF CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o.d -o CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o -c /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/OrchestratorCLI.cpp
 
 CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.i: cmake_force
@@ -114,7 +100,7 @@ CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.s: cmake_force
 CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o: CMakeFiles/Orchestrator-CLI.dir/flags.make
 CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o: /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/String.cpp
 CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o: CMakeFiles/Orchestrator-CLI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o -MF CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o.d -o CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o -c /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/String.cpp
 
 CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.i: cmake_force
@@ -128,7 +114,7 @@ CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.s: cmake_force
 CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o: CMakeFiles/Orchestrator-CLI.dir/flags.make
 CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o: /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/Tools.cpp
 CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o: CMakeFiles/Orchestrator-CLI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o -MF CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o.d -o CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o -c /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/Tools.cpp
 
 CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.i: cmake_force
@@ -142,7 +128,7 @@ CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.s: cmake_force
 CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: CMakeFiles/Orchestrator-CLI.dir/flags.make
 CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/main.cpp
 CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: CMakeFiles/Orchestrator-CLI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o -MF CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o.d -o CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o -c /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/main.cpp
 
 CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.i: cmake_force
@@ -156,7 +142,6 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.s: cmake_force
 # Object files for target Orchestrator-CLI
 Orchestrator__CLI_OBJECTS = \
 "CMakeFiles/Orchestrator-CLI.dir/src/CommandLineParser.cpp.o" \
-"CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o" \
 "CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o" \
 "CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o" \
 "CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o" \
@@ -166,14 +151,13 @@ Orchestrator__CLI_OBJECTS = \
 Orchestrator__CLI_EXTERNAL_OBJECTS =
 
 bin/Orchestrator-CLI: CMakeFiles/Orchestrator-CLI.dir/src/CommandLineParser.cpp.o
-bin/Orchestrator-CLI: CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o
 bin/Orchestrator-CLI: CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o
 bin/Orchestrator-CLI: CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o
 bin/Orchestrator-CLI: CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o
 bin/Orchestrator-CLI: CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o
 bin/Orchestrator-CLI: CMakeFiles/Orchestrator-CLI.dir/build.make
 bin/Orchestrator-CLI: CMakeFiles/Orchestrator-CLI.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable bin/Orchestrator-CLI"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable bin/Orchestrator-CLI"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Orchestrator-CLI.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

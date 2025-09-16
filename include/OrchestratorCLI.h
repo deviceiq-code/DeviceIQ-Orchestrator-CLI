@@ -28,16 +28,12 @@
 #include <nlohmann/json.hpp>
 
 #include "String.h"
-#include "Log.h"
 #include "Tools.h"
 
 using namespace std;
-using namespace Orchestrator_Log;
 using namespace Tools;
 
 using json = nlohmann::json;
-
-extern Orchestrator_Log::Log *ServerLog;
 
 constexpr size_t DEF_BUFFERSIZE = 1024;
 constexpr uint32_t DEF_LISTENTIMEOUT = 5;

@@ -395,11 +395,6 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/sys/signalfd.h \
  /usr/include/x86_64-linux-gnu/bits/signalfd.h \
  /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/String.h \
- /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/Log.h \
- /usr/include/syslog.h /usr/include/x86_64-linux-gnu/sys/syslog.h \
- /usr/include/x86_64-linux-gnu/bits/syslog-path.h /usr/include/libgen.h \
- /usr/include/c++/13/bitset \
- /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/./Tools.h \
- /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/./Version.h \
  /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/Tools.h \
+ /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/Version.h \
  /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/CommandLineParser.h

@@ -1,8 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Orchestrator-CLI.dir/src/CommandLineParser.cpp.o"
   "CMakeFiles/Orchestrator-CLI.dir/src/CommandLineParser.cpp.o.d"
-  "CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o"
-  "CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o.d"
   "CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o"
   "CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o.d"
   "CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o"

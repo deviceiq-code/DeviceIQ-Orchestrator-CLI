@@ -391,10 +391,5 @@ CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o: \
  /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/vcpkg_installed/x64-linux/include/nlohmann/detail/macro_unscope.hpp \
  /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/vcpkg_installed/x64-linux/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
  /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/String.h \
- /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/Log.h \
- /usr/include/syslog.h /usr/include/x86_64-linux-gnu/sys/syslog.h \
- /usr/include/x86_64-linux-gnu/bits/syslog-path.h /usr/include/libgen.h \
- /usr/include/c++/13/bitset \
- /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/./Tools.h \
- /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/./Version.h \
- /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/Tools.h
+ /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/Tools.h \
+ /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/../include/Version.h

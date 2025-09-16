@@ -9,7 +9,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/CommandLineParser.cpp" "CMakeFiles/Orchestrator-CLI.dir/src/CommandLineParser.cpp.o" "gcc" "CMakeFiles/Orchestrator-CLI.dir/src/CommandLineParser.cpp.o.d"
-  "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/Log.cpp" "CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o" "gcc" "CMakeFiles/Orchestrator-CLI.dir/src/Log.cpp.o.d"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/OrchestratorCLI.cpp" "CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o" "gcc" "CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o.d"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/String.cpp" "CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o" "gcc" "CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.o.d"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/Tools.cpp" "CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o" "gcc" "CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o.d"

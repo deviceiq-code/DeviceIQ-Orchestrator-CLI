@@ -15,8 +15,6 @@
 using namespace std;
 using json = nlohmann::json;
 
-using namespace Orchestrator_Log;
-
 OrchestratorCLI *Orchestrator;
 
 string TargetInterface;

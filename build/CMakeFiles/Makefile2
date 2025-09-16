@@ -81,12 +81,12 @@ clean: CMakeFiles/Orchestrator-CLI.dir/clean
 CMakeFiles/Orchestrator-CLI.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Orchestrator-CLI.dir/build.make CMakeFiles/Orchestrator-CLI.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Orchestrator-CLI.dir/build.make CMakeFiles/Orchestrator-CLI.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target Orchestrator-CLI"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target Orchestrator-CLI"
 .PHONY : CMakeFiles/Orchestrator-CLI.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Orchestrator-CLI.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Orchestrator-CLI.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/build/CMakeFiles 0
 .PHONY : CMakeFiles/Orchestrator-CLI.dir/rule

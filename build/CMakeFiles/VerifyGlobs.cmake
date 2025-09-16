@@ -6,7 +6,6 @@ cmake_policy(SET CMP0009 NEW)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/include/*.h")
 set(OLD_GLOB
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/include/CommandLineParser.h"
-  "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/include/Log.h"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/include/OrchestratorCLI.h"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/include/String.h"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/include/Tools.h"
@@ -30,7 +29,6 @@ endif()
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/*.cpp")
 set(OLD_GLOB
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/CommandLineParser.cpp"
-  "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/Log.cpp"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/OrchestratorCLI.cpp"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/String.cpp"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/Tools.cpp"
