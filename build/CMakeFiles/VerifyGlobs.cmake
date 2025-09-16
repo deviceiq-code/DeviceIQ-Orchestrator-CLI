@@ -8,7 +8,6 @@ set(OLD_GLOB
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/include/CommandLineParser.h"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/include/OrchestratorCLI.h"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/include/String.h"
-  "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/include/Tools.h"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/include/Version.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
@@ -31,7 +30,6 @@ set(OLD_GLOB
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/CommandLineParser.cpp"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/OrchestratorCLI.cpp"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/String.cpp"
-  "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/Tools.cpp"
   "/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

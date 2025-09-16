@@ -202,30 +202,6 @@ src/String.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Orchestrator-CLI.dir/build.make CMakeFiles/Orchestrator-CLI.dir/src/String.cpp.s
 .PHONY : src/String.cpp.s
 
-src/Tools.o: src/Tools.cpp.o
-.PHONY : src/Tools.o
-
-# target to build an object file
-src/Tools.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Orchestrator-CLI.dir/build.make CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.o
-.PHONY : src/Tools.cpp.o
-
-src/Tools.i: src/Tools.cpp.i
-.PHONY : src/Tools.i
-
-# target to preprocess a source file
-src/Tools.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Orchestrator-CLI.dir/build.make CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.i
-.PHONY : src/Tools.cpp.i
-
-src/Tools.s: src/Tools.cpp.s
-.PHONY : src/Tools.s
-
-# target to generate assembly for a file
-src/Tools.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Orchestrator-CLI.dir/build.make CMakeFiles/Orchestrator-CLI.dir/src/Tools.cpp.s
-.PHONY : src/Tools.cpp.s
-
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -268,9 +244,6 @@ help:
 	@echo "... src/String.o"
 	@echo "... src/String.i"
 	@echo "... src/String.s"
-	@echo "... src/Tools.o"
-	@echo "... src/Tools.i"
-	@echo "... src/Tools.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

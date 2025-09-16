@@ -20,11 +20,10 @@ OrchestratorCLI *Orchestrator;
 string TargetInterface;
 string TargetDevice;
 
-bool Force = DEF_FORCE;
-bool Apply = DEF_APPLY;
+bool Force = false;
+bool Apply = false;
 
 OrchestratorAction Action = ACTION_NOACTION;
-DiscoveryMode Mode = DISCOVERY_NONE;
 
 void ShowResult(const string &command, const bool result) {
     if (result) {
@@ -51,10 +50,6 @@ int main(int argc, char** argv) {
     clp.OnParameter('t', "target", required_argument, [](char* p_arg) {
         if (p_arg[0] == '=') p_arg = ++p_arg;
         TargetDevice = p_arg;
-
-        if (String(TargetDevice).Equals("all", true)) { Mode = DISCOVERY_ALL; };
-        if (String(TargetDevice).Equals("managed", true)) { Mode = DISCOVERY_MANAGED; };
-        if (String(TargetDevice).Equals("unmanaged", true)) { Mode = DISCOVERY_UNMANAGED; };
     });
 
     clp.OnParameter('c', "config", required_argument, [&](char* p_arg) {
@@ -77,7 +72,7 @@ int main(int argc, char** argv) {
 
     // Actions
     clp.OnAction("add", []() { Action = ACTION_ADD; });
-    clp.OnAction("discover", []() { Action = ACTION_DISCOVERY; });
+    clp.OnAction("discover", []() { Action = ACTION_DISCOVER; });
     clp.OnAction("getlog", []() { Action = ACTION_GETLOG; });
     clp.OnAction("list", []() { Action = ACTION_LIST; });
     clp.OnAction("pull", []() { Action = ACTION_PULL; });
@@ -101,7 +96,7 @@ int main(int argc, char** argv) {
         case ACTION_ADD : {
 
         } break;
-        case ACTION_DISCOVERY : {
+        case ACTION_DISCOVER : {
             ShowResult("discover", Orchestrator->Discovery(TargetDevice));
         } break;
         case ACTION_GETLOG : {
