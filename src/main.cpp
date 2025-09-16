@@ -77,7 +77,6 @@ int main(int argc, char** argv) {
 
     // Actions
     clp.OnAction("add", []() { Action = ACTION_ADD; });
-    clp.OnAction("checkonline", []() { Action = ACTION_CHECKONLINE; });
     clp.OnAction("discover", []() { Action = ACTION_DISCOVERY; });
     clp.OnAction("getlog", []() { Action = ACTION_GETLOG; });
     clp.OnAction("list", []() { Action = ACTION_LIST; });
@@ -101,10 +100,6 @@ int main(int argc, char** argv) {
     switch (Action) {
         case ACTION_ADD : {
 
-        } break;
-        case ACTION_CHECKONLINE : {
-            fprintf(stdout, "Orchestrator server %s is: %s\r\n\r\n", TargetDevice.c_str(), (Orchestrator->CheckOnline(TargetDevice, 30030) ? "online" : "offline"));
-            exit(0);
         } break;
         case ACTION_DISCOVERY : {
             ShowResult("discover", Orchestrator->Discovery(TargetDevice));

@@ -72,25 +72,6 @@ void OrchestratorClient::OutgoingBuffer(const string &value) {
     }
 }
 
-void OrchestratorCLI::init() {
-    mServerStartedTimestamp = CurrentDateTime();
-}
-
-std::string OrchestratorCLI::generateRandomID() {
-    std::string result;
-
-    const std::string valid_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    std::random_device rd;
-    std::mt19937 generator(rd());
-    std::uniform_int_distribution<> distribution(0, valid_characters.size() - 1);
-
-    for (int i = 0; i < 15; ++i) {
-        result += valid_characters[distribution(generator)];
-    }
-    
-    return result;
-}
-
 std::string OrchestratorCLI::queryIPAddress(const char* mac_address) {
     if (Configuration.contains("Managed Devices") || Configuration["Managed Devices"].is_object()) {
         for (const auto& [device_id, device_info] : Configuration["Managed Devices"].items()) {
@@ -155,14 +136,12 @@ void OrchestratorCLI::List() {
         fprintf(stdout, "No devices managed by this server.\r\n\r\n");
         return;
     } else {
-        fprintf(stdout, "%s | %s | %s | %s | %s | %s | %s | %s\r\n",
-            String("Product Name").LimitString(20, true) .c_str(),
+        fprintf(stdout, "%s | %s | %s | %s | %s | %s\r\n",
+            String("MAC Address").LimitString(17, true).c_str(),
+            String("Hostname").LimitString(20, true).c_str(),
+            String("IP Address").LimitString(15, true).c_str(),
             String("Hardware Model").LimitString(20, true) .c_str(),
             String("Version").LimitString(8, true).c_str(),
-            String("Device Name").LimitString(20, true) .c_str(),
-            String("Hostname").LimitString(20, true).c_str(),
-            String("MAC Address").LimitString(17, true).c_str(),
-            String("IP Address").LimitString(15, true).c_str(),
             String("Last Update").LimitString(19, true).c_str()
         );
 
@@ -172,15 +151,18 @@ void OrchestratorCLI::List() {
             for (const auto& [device_id, device_info] : Configuration["Managed Devices"].items()) {
                 c++;
 
-                fprintf(stdout, "%s | %s | %s | %s | %s | %s | %s | %s\r\n",
-                    String(device_info.value("Product Name", "Unknown")).LimitString(20, true).c_str(),
-                    String(device_info.value("Hardware Model", "Unknown")).LimitString(20, true).c_str(),
-                    String(device_info.value("Version", "Unknown")).LimitString(8, true).c_str(),
-                    String(device_info.value("Device Name", "Unknown")).LimitString(20, true).c_str(),
-                    String(device_info.value("Hostname", "Unknown")).LimitString(20, true).c_str(),
+                fprintf(stdout, "%s | %s | %s | %s | %s | %s\r\n",
                     String(device_id).LimitString(17, true).c_str(),
+                    String(device_info.value("Hostname", "Unknown")).LimitString(20, true).c_str(),
                     String(device_info.value("IP Address", "Unknown")).LimitString(15, true).c_str(),
-                    String(device_info.value("Last Update", 0)).LimitString(19, true).c_str()
+                    "3",
+                    "4",
+                    "5"
+                    // String(device_info.value("Hostname", "Unknown")).LimitString(20, true).c_str(),
+                    // String(device_info.value("IP Address", "Unknown")).LimitString(15, true).c_str(),
+                    // String(device_info.value("Hardware Model", "Unknown")).LimitString(20, true).c_str(),
+                    // String(device_info.value("Version", "Unknown")).LimitString(8, true).c_str(),
+                    // String(device_info.value("Last Update", "")).LimitString(19, true).c_str()
                 );
             }
 
@@ -190,14 +172,6 @@ void OrchestratorCLI::List() {
             exit(1);
         }
     }
-}
-
-OperationResult OrchestratorCLI::Add(std::string target, const uint16_t listen_timeout, const bool force) {
-    return OperationResult::ADD_SUCCESS;
-}
-
-OperationResult OrchestratorCLI::Remove(std::string target, const uint16_t listen_timeout, const bool force) {
-    return OperationResult::REMOVE_SUCCESS;
 }
 
 bool OrchestratorCLI::Update(const String &target) {
@@ -274,8 +248,7 @@ bool OrchestratorCLI::Initialize() {
 
     if (Configuration.empty()) {
         if (ReadConfiguration()) {
-            if (JSON<std::string>(Configuration["Configuration"]["Server Name"], "") == "") Configuration["Configuration"]["Server Name"] = DEF_SERVERNAME;
-            if (JSON<std::string>(Configuration["Configuration"]["Server ID"], "") == "") Configuration["Configuration"]["Server ID"] = generateRandomID();
+            
         }
     }
 
@@ -311,47 +284,11 @@ bool OrchestratorCLI::ReadConfiguration() {
             configFile >> Configuration;
             ret = true;
         } catch (nlohmann::json::parse_error& ex) {
-            // fprintf(stdout, "Parse error at byte " + to_string(ex.byte) + ":" + ex.what() + " on file " + mConfigFile, LOGLEVEL_ERROR);
-            ret = false;
-        }
-    } else {
-        Configuration["Configuration"] = {
-            {"Log Endpoint", "ENDPOINT_FILE, ENDPOINT_SYSLOG_LOCAL, ENDPOINT_SYSLOG_REMOTE"},
-            {"Log File Append", false},
-            {"Bind", ""},
-            {"Port", 30030},
-            {"Timeout Ms", 15000},
-            {"Buffer Size", 1024},
-            {"Server ID", ""},
-            {"Server Name", ""},
-            {"Syslog Port", 514},
-            {"Syslog URL", ""}
-        };
-
-        Configuration["Managed Devices"] = {
-        };
-        
-        if (SaveConfiguration()) {
-            // fprintf(stdout, "Configuration file not found - Default config file " + string(DEF_CONFIGFILE) + " created", LOGLEVEL_WARNING);
-            ret = true;
-        } else {
-            // fprintf(stdout, "Configuration file not found - Unable to create default config file " + string(DEF_CONFIGFILE), LOGLEVEL_ERROR);
             ret = false;
         }
     }
 
     return ret;
-}
-
-bool OrchestratorCLI::SaveConfiguration() {
-    ofstream outFile(mConfigFile.c_str());
-
-    if (!outFile.is_open()) return false;
-
-    outFile << Configuration.dump(4);
-    outFile.close();
-
-    return !outFile.fail();
 }
 
 bool OrchestratorCLI::resolveInterfaceOrIp(const std::string& ifaceOrIp, in_addr& out) {
@@ -474,66 +411,6 @@ json OrchestratorCLI::Query(const std::string& orchestrator_url, uint16_t orches
 
     freeaddrinfo(res);
     return reply;
-}
-
-void OrchestratorCLI::UpdateStatus(bool status) {
-    json JsonStatusUpdater;
-    JsonStatusUpdater["Orchestrator"]["Status"] = {
-        {"Version", Version.Software.Info()},
-        {"Online", status},
-        {"Server Started", ServerStartedTimestamp()},
-        {"Last Update", CurrentDateTime()}
-    };
-
-    ofstream outFile(JSON<string>(Configuration["Configuration"]["Status Updater"]["Output File"], "./status.json").c_str());
-    if (!outFile.is_open()) {
-        fprintf(stdout, "Failed to open Orchestrator status update file %s\r\n", JSON<string>(Configuration["Configuration"]["Status Updater"]["Output File"], "./status.json").c_str());
-    };
-
-    outFile << JsonStatusUpdater.dump(4);
-    outFile.close();
-
-    if (!outFile.fail()) {
-        fprintf(stdout, "Orchestrator status file %s updated.\r\n", JSON<string>(Configuration["Configuration"]["Status Updater"]["Output File"], "./status.json").c_str());
-    }
-}
-
-bool OrchestratorCLI::CheckOnline(const std::string& orchestrator_url, uint16_t orchestrator_port) {
-    json JsonQuery;
-    JsonQuery = {
-        {"Provider", "Orchestrator"},
-        {"Command", "CheckOnline"},
-        {"Parameter", ""}
-    };
-
-    json JsonReply = Query(orchestrator_url, orchestrator_port, JsonQuery);
-    bool rst = false;
-
-    if (!JsonReply.empty()) {
-        if (JsonReply.contains("Provider")) {
-            rst = (JsonReply.value("Result", "") == "Yes" ? true : false);
-        }
-    }
-    return rst;
-}
-
-bool OrchestratorCLI::ReloadConfig(const std::string& orchestrator_url, uint16_t orchestrator_port) {
-    json JsonQuery;
-    JsonQuery = {
-        {"Provider", "Orchestrator"},
-        {"Command", "ReloadConfig"},
-        {"Parameter", ""}
-    };
-
-    json JsonReply = Query(orchestrator_url, orchestrator_port, JsonQuery);
-    bool rst = false;
-
-    if (!JsonReply.empty()) {
-        if (JsonReply.contains("Provider")) {
-            rst = (JsonReply.value("Result", "") == "Ok" ? true : false);
-        }
-    }
-    return rst;
 }
 
 // Helper: converte in_addr -> string

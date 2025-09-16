@@ -22,8 +22,6 @@
 #include <errno.h>
 #include <cstring>
 #include <filesystem>
-#include <csignal>
-#include <sys/signalfd.h>
 #include <poll.h>
 #include <nlohmann/json.hpp>
 
@@ -35,8 +33,8 @@ using namespace Tools;
 
 using json = nlohmann::json;
 
-constexpr size_t DEF_BUFFERSIZE = 1024;
-constexpr uint32_t DEF_LISTENTIMEOUT = 5;
+// constexpr size_t DEF_BUFFERSIZE = 1024;
+// constexpr uint32_t DEF_LISTENTIMEOUT = 5;
 constexpr uint16_t DEF_PORT = 30030;
 constexpr char DEF_BROADCASTADDRESS[] = "255.255.255.255";
 constexpr char DEF_CONFIGFILE[] = "./orchestrator.json";
@@ -120,15 +118,12 @@ struct Device {
 
 class OrchestratorCLI {
     private:
-        string mServerStartedTimestamp;
-
         in_addr mBindAddr{};
         bool resolveInterfaceOrIp(const string& ifaceOrIp, in_addr& out);
         bool setBindInterface(const std::string& ifaceOrIp);
 
         string mConfigFile = DEF_CONFIGFILE;
 
-        string generateRandomID();
         string queryIPAddress(const char* mac_address);
         string queryMACAddress(const char* ip_address);
 
@@ -137,16 +132,11 @@ class OrchestratorCLI {
 
         void applyBindForUdpSocket(int sockfd);
         bool sendMessage(const std::string& message, const uint16_t port, const char* dest_address = DEF_BROADCASTADDRESS);
-
-        void init();
     public:
-        explicit OrchestratorCLI() { init(); }
+        explicit OrchestratorCLI() {}
 
         inline std::string ConfigFile() const { return mConfigFile; }
         inline void ConfigFile(const std::string& value) { mConfigFile = value; }
-
-        inline const string &ServerStartedTimestamp() const { return mServerStartedTimestamp; }
-        void UpdateStatus(bool status);
 
         void List();
         bool Discovery(const String &target);
@@ -156,20 +146,12 @@ class OrchestratorCLI {
         bool Push(const String &target);
         bool Update(const String &target);
         bool GetLog(const String &target);
-
-        OperationResult Add(std::string target, const uint16_t listen_timeout = DEF_LISTENTIMEOUT, const bool force = DEF_FORCE);
-        OperationResult Remove(std::string target, const uint16_t listen_timeout = DEF_LISTENTIMEOUT, const bool force = DEF_FORCE);
         
         json Query(const std::string& orchestrator_url, uint16_t orchestrator_port, const json& payload);
         bool SendToDevice(const std::string& destination, const json& payload);
-
-        bool CheckOnline(const std::string& orchestrator_url, uint16_t orchestrator_port);
-        bool ReloadConfig(const std::string& orchestrator_url, uint16_t orchestrator_port);
-
         
         bool Initialize();
         bool ReadConfiguration();
-        bool SaveConfiguration();
 
         json Configuration;
 };

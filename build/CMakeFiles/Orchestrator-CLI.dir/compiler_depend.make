@@ -446,7 +446,6 @@ CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o: /home/fernando/Repos/
   /usr/include/c++/13/codecvt \
   /usr/include/c++/13/compare \
   /usr/include/c++/13/concepts \
-  /usr/include/c++/13/csignal \
   /usr/include/c++/13/cstddef \
   /usr/include/c++/13/cstdint \
   /usr/include/c++/13/cstdio \
@@ -550,7 +549,6 @@ CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o: /home/fernando/Repos/
   /usr/include/rpc/netdb.h \
   /usr/include/sched.h \
   /usr/include/semaphore.h \
-  /usr/include/signal.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -610,23 +608,9 @@ CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o: /home/fernando/Repos/
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/semaphore.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
-  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
-  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
-  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
-  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
-  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
-  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
-  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
-  /usr/include/x86_64-linux-gnu/bits/signalfd.h \
-  /usr/include/x86_64-linux-gnu/bits/signum-arch.h \
-  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
-  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
-  /usr/include/x86_64-linux-gnu/bits/sigstksz.h \
-  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
   /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
   /usr/include/x86_64-linux-gnu/bits/socket.h \
   /usr/include/x86_64-linux-gnu/bits/socket_type.h \
-  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
   /usr/include/x86_64-linux-gnu/bits/stat.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
@@ -658,19 +642,14 @@ CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o: /home/fernando/Repos/
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
@@ -708,14 +687,12 @@ CMakeFiles/Orchestrator-CLI.dir/src/OrchestratorCLI.cpp.o: /home/fernando/Repos/
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/sys/poll.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
-  /usr/include/x86_64-linux-gnu/sys/signalfd.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/socket.h \
   /usr/include/x86_64-linux-gnu/sys/syscall.h \
   /usr/include/x86_64-linux-gnu/sys/time.h \
   /usr/include/x86_64-linux-gnu/sys/timerfd.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
-  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
@@ -1557,7 +1534,6 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
   /usr/include/c++/13/codecvt \
   /usr/include/c++/13/compare \
   /usr/include/c++/13/concepts \
-  /usr/include/c++/13/csignal \
   /usr/include/c++/13/cstddef \
   /usr/include/c++/13/cstdint \
   /usr/include/c++/13/cstdio \
@@ -1662,7 +1638,6 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
   /usr/include/rpc/netdb.h \
   /usr/include/sched.h \
   /usr/include/semaphore.h \
-  /usr/include/signal.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -1723,23 +1698,9 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/semaphore.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
-  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
-  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
-  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
-  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
-  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
-  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
-  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
-  /usr/include/x86_64-linux-gnu/bits/signalfd.h \
-  /usr/include/x86_64-linux-gnu/bits/signum-arch.h \
-  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
-  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
-  /usr/include/x86_64-linux-gnu/bits/sigstksz.h \
-  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
   /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
   /usr/include/x86_64-linux-gnu/bits/socket.h \
   /usr/include/x86_64-linux-gnu/bits/socket_type.h \
-  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
   /usr/include/x86_64-linux-gnu/bits/stat.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
@@ -1771,19 +1732,14 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
@@ -1821,20 +1777,20 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/sys/poll.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
-  /usr/include/x86_64-linux-gnu/sys/signalfd.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/socket.h \
   /usr/include/x86_64-linux-gnu/sys/syscall.h \
   /usr/include/x86_64-linux-gnu/sys/time.h \
   /usr/include/x86_64-linux-gnu/sys/timerfd.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
-  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
+
+/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/String.cpp:
 
 /usr/include/x86_64-linux-gnu/sys/time.h:
 
@@ -1844,8 +1800,6 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
 
 /usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/stack_t.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h:
@@ -1854,29 +1808,11 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
 
 /usr/include/x86_64-linux-gnu/bits/timerfd.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/ss_flags.h:
+/usr/include/x86_64-linux-gnu/bits/stat.h:
 
 /usr/include/x86_64-linux-gnu/bits/socket.h:
 
 /usr/include/x86_64-linux-gnu/bits/sockaddr.h:
-
-/usr/include/x86_64-linux-gnu/bits/stat.h:
-
-/usr/include/x86_64-linux-gnu/bits/sigstksz.h:
-
-/usr/include/x86_64-linux-gnu/bits/sigstack.h:
-
-/home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/String.cpp:
-
-/usr/include/x86_64-linux-gnu/bits/signalfd.h:
-
-/usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h:
-
-/usr/include/x86_64-linux-gnu/bits/siginfo-arch.h:
-
-/usr/include/x86_64-linux-gnu/bits/sigevent-consts.h:
 
 /usr/include/x86_64-linux-gnu/bits/semaphore.h:
 
@@ -1918,15 +1854,11 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
 
 /usr/include/linux/falloc.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h:
-
 /usr/include/ifaddrs.h:
 
 /usr/include/c++/13/variant:
 
 /usr/include/c++/13/valarray:
-
-/usr/include/x86_64-linux-gnu/bits/sigcontext.h:
 
 /usr/include/c++/13/tr1/special_function_util.h:
 
@@ -1966,8 +1898,6 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
 
 /usr/include/strings.h:
 
-/usr/include/signal.h:
-
 /usr/include/c++/13/iomanip:
 
 /usr/include/c++/13/forward_list:
@@ -1985,8 +1915,6 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
 /usr/include/c++/13/ctime:
 
 /usr/include/c++/13/cstring:
-
-/usr/include/c++/13/csignal:
 
 /usr/include/c++/13/codecvt:
 
@@ -2011,8 +1939,6 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
 /usr/include/c++/13/bits/stl_raw_storage_iter.h:
 
 /usr/include/c++/13/bits/stl_numeric.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigval_t.h:
 
 /usr/include/c++/13/bits/stl_map.h:
 
@@ -2047,8 +1973,6 @@ CMakeFiles/Orchestrator-CLI.dir/src/main.cpp.o: /home/fernando/Repos/DeviceIQ-Or
 /usr/include/c++/13/bits/fs_path.h:
 
 /usr/include/c++/13/bits/fs_ops.h:
-
-/usr/include/x86_64-linux-gnu/bits/sigaction.h:
 
 /usr/include/c++/13/bits/fs_fwd.h:
 
@@ -2276,8 +2200,6 @@ vcpkg_installed/x64-linux/include/nlohmann/byte_container_with_subtype.hpp:
 
 /usr/include/c++/13/exception:
 
-/usr/include/x86_64-linux-gnu/bits/signum-arch.h:
-
 /usr/include/c++/13/bits/stl_pair.h:
 
 /usr/include/x86_64-linux-gnu/bits/errno.h:
@@ -2440,8 +2362,6 @@ vcpkg_installed/x64-linux/include/nlohmann/detail/meta/std_fs.hpp:
 
 /usr/include/c++/13/bits/basic_string.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/signum-generic.h:
-
 /usr/include/c++/13/iosfwd:
 
 /usr/include/c++/13/bits/ranges_cmp.h:
@@ -2475,8 +2395,6 @@ vcpkg_installed/x64-linux/include/nlohmann/detail/meta/std_fs.hpp:
 /usr/include/c++/13/bits/hash_bytes.h:
 
 /usr/include/c++/13/bits/erase_if.h:
-
-/usr/include/x86_64-linux-gnu/sys/ucontext.h:
 
 /home/fernando/Repos/DeviceIQ-Orchestrator-CLI/src/CommandLineParser.cpp:
 
@@ -2618,8 +2536,6 @@ vcpkg_installed/x64-linux/include/nlohmann/detail/abi_macros.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/getopt_ext.h:
 
-/usr/include/x86_64-linux-gnu/sys/signalfd.h:
-
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
@@ -2683,8 +2599,6 @@ vcpkg_installed/x64-linux/include/nlohmann/detail/iterators/internal_iterator.hp
 /usr/include/math.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h:
 
 /usr/include/c++/13/bits/stl_multimap.h:
 
@@ -2750,8 +2664,6 @@ vcpkg_installed/x64-linux/include/nlohmann/json_fwd.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
 
-/usr/include/x86_64-linux-gnu/bits/signal_ext.h:
-
 /usr/include/c++/13/bits/std_function.h:
 
 /usr/include/c++/13/bits/char_traits.h:
@@ -2784,8 +2696,6 @@ vcpkg_installed/x64-linux/include/nlohmann/detail/iterators/iterator_traits.hpp:
 
 /usr/include/x86_64-linux-gnu/sys/types.h:
 
-/usr/include/x86_64-linux-gnu/bits/siginfo-consts.h:
-
 /usr/include/c++/13/numeric:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h:
@@ -2805,7 +2715,5 @@ vcpkg_installed/x64-linux/include/nlohmann/detail/conversions/to_chars.hpp:
 vcpkg_installed/x64-linux/include/nlohmann/detail/conversions/to_json.hpp:
 
 vcpkg_installed/x64-linux/include/nlohmann/detail/input/parser.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/sigthread.h:
 
 vcpkg_installed/x64-linux/include/nlohmann/detail/input/position_t.hpp:
