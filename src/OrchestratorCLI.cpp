@@ -392,7 +392,6 @@ bool OrchestratorCLI::Restart(const String& target) {
 
     auto send_to_group = [&](const char* section, size_t& ok, size_t& fail, size_t& skipped) -> bool {
         if (!Configuration.contains(section) || Configuration[section].empty()) {
-            std::fprintf(stdout, "[Restart] No devices under section: %s\r\n", section);
             return false;
         }
 
@@ -401,14 +400,11 @@ bool OrchestratorCLI::Restart(const String& target) {
             const nlohmann::json& dev = kv.value();
 
             if (!dev.contains("IP Address") || dev["IP Address"].is_null()) {
-                std::fprintf(stdout, "[Restart] %s has no IP Address — ignored\r\n", mac.c_str());
                 ++skipped;
                 continue;
             }
 
             const std::string ip = dev["IP Address"].get<std::string>();
-            std::fprintf(stdout, "[Restart] %s — %s\r\n\r\n", mac.c_str(), ip.c_str());
-
             const bool sent = SendToDevice(ip, JsonCommand);
             if (sent) ++ok; else ++fail;
         }
@@ -427,18 +423,16 @@ bool OrchestratorCLI::Restart(const String& target) {
         }
 
         if (!any_section) {
-            std::fprintf(stdout, "[Restart] No devices found for requested group(s).");
             return false;
         }
 
-        std::fprintf(stdout, "[Update] Multicast finished: Sent = %s, Failed = %s, Ignored = %s\r\n", std::to_string(ok).c_str(), std::to_string(fail).c_str(), std::to_string(skipped).c_str());
-
+        std::fprintf(stdout, "Restart — Multicast finished: Sent = %s, Failed = %s, Ignored = %s\r\n", std::to_string(ok).c_str(), std::to_string(fail).c_str(), std::to_string(skipped).c_str());
         return ok > 0;
     }
 
     nlohmann::json device = getDevice(target);
     if (device.empty()) {
-        std::fprintf(stdout, "[Restart] Target device not found: %s\r\n", target.c_str());
+        std::fprintf(stdout, "Restart — Target device not found: %s\r\n", target.c_str());
         return false;
     }
 
