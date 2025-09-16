@@ -129,7 +129,7 @@ bool OrchestratorCLI::sendMessage(const std::string& message, const uint16_t por
     return true;
 }
 
-void OrchestratorCLI::List() {
+void OrchestratorCLI::List(const String &target) {
     fprintf(stdout, "Devices managed by this server:\r\n\r\n");
     
     if (Configuration["Managed Devices"].size() == 0) {
@@ -149,16 +149,17 @@ void OrchestratorCLI::List() {
             uint16_t c = 0;
 
             for (const auto& [device_id, device_info] : Configuration["Managed Devices"].items()) {
-                c++;
-
-                fprintf(stdout, "%s | %s | %s | %s | %s | %s\r\n",
-                    String(device_id).LimitString(17, true).c_str(),
-                    String(device_info.value("Hostname", "Unknown")).LimitString(20, true).c_str(),
-                    String(device_info.value("IP Address", "Unknown")).LimitString(15, true).c_str(),
-                    String(device_info.value("Hardware Model", "Unknown")).LimitString(20, true).c_str(),
-                    String(device_info.value("Version", "Unknown")).LimitString(7, true).c_str(),
-                    String(device_info.value("Last Update", "")).LimitString(27, true).c_str()
-                );
+                if ((target == "") || (target.Equals(device_info.value("Hostname", "Unknown"), true)) || (target.Equals(device_info.value("IP Address", "Unknown"), true)) || (target.Equals(device_id, true))) {
+                    c++;
+                    fprintf(stdout, "%s | %s | %s | %s | %s | %s\r\n",
+                        String(device_id).LimitString(17, true).c_str(),
+                        String(device_info.value("Hostname", "Unknown")).LimitString(20, true).c_str(),
+                        String(device_info.value("IP Address", "Unknown")).LimitString(15, true).c_str(),
+                        String(device_info.value("Hardware Model", "Unknown")).LimitString(20, true).c_str(),
+                        String(device_info.value("Version", "Unknown")).LimitString(7, true).c_str(),
+                        String(device_info.value("Last Update", "")).LimitString(27, true).c_str()
+                    );
+                }
             }
 
             fprintf(stdout, "\r\n%d device%s managed.\r\n\r\n", c, (c > 1 ? "s" : ""));

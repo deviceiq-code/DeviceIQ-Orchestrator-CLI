@@ -138,7 +138,7 @@ class OrchestratorCLI {
         inline std::string ConfigFile() const { return mConfigFile; }
         inline void ConfigFile(const std::string& value) { mConfigFile = value; }
 
-        void List();
+        void List(const String &target = String());
         bool Discovery(const String &target);
         bool Restart(const String &target);
         bool Refresh(const String &target);

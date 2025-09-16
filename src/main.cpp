@@ -108,7 +108,7 @@ int main(int argc, char** argv) {
             ShowResult("getlog", Orchestrator->GetLog(TargetDevice));
         } break;
         case ACTION_LIST : {
-            Orchestrator->List();
+            Orchestrator->List(TargetDevice);
         } break;
         case ACTION_PULL : {
             ShowResult("pull", Orchestrator->Pull(TargetDevice));
