@@ -141,8 +141,8 @@ void OrchestratorCLI::List() {
             String("Hostname").LimitString(20, true).c_str(),
             String("IP Address").LimitString(15, true).c_str(),
             String("Hardware Model").LimitString(20, true) .c_str(),
-            String("Version").LimitString(8, true).c_str(),
-            String("Last Update").LimitString(19, true).c_str()
+            String("Version").LimitString(7, true).c_str(),
+            String("Last Update").LimitString(27, true).c_str()
         );
 
         if (Configuration.contains("Managed Devices") && Configuration["Managed Devices"].is_object()) {
@@ -155,14 +155,9 @@ void OrchestratorCLI::List() {
                     String(device_id).LimitString(17, true).c_str(),
                     String(device_info.value("Hostname", "Unknown")).LimitString(20, true).c_str(),
                     String(device_info.value("IP Address", "Unknown")).LimitString(15, true).c_str(),
-                    "3",
-                    "4",
-                    "5"
-                    // String(device_info.value("Hostname", "Unknown")).LimitString(20, true).c_str(),
-                    // String(device_info.value("IP Address", "Unknown")).LimitString(15, true).c_str(),
-                    // String(device_info.value("Hardware Model", "Unknown")).LimitString(20, true).c_str(),
-                    // String(device_info.value("Version", "Unknown")).LimitString(8, true).c_str(),
-                    // String(device_info.value("Last Update", "")).LimitString(19, true).c_str()
+                    String(device_info.value("Hardware Model", "Unknown")).LimitString(20, true).c_str(),
+                    String(device_info.value("Version", "Unknown")).LimitString(7, true).c_str(),
+                    String(device_info.value("Last Update", "")).LimitString(27, true).c_str()
                 );
             }
 
