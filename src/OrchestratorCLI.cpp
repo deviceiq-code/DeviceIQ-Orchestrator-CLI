@@ -139,7 +139,7 @@ bool OrchestratorCLI::Discovery(const String& target) {
         {"Parameter","All"},
     };
 
-    return SendToDevice(target, JsonCommand);
+    return PokeDevice(target, JsonCommand);
 }
 
 bool OrchestratorCLI::GetLog(const String& target) {
@@ -253,7 +253,7 @@ bool OrchestratorCLI::Pull(const String& target) {
             const std::string ip = dev["IP Address"].get<std::string>();
             std::fprintf(stdout, "[Pull] %s — %s\r\n", mac.c_str(), ip.c_str());
 
-            const bool sent = SendToDevice(ip, JsonCommand);
+            const bool sent = PokeDevice(ip, JsonCommand);
             if (sent) ++ok; else ++fail;
         }
 
@@ -272,7 +272,7 @@ bool OrchestratorCLI::Pull(const String& target) {
     const std::string ip = it.value().at("IP Address").get<std::string>();
     std::fprintf(stdout, "[Pull] %s — %s\r\n", it.key().c_str(), ip.c_str());
 
-    return SendToDevice(ip, JsonCommand);
+    return PokeDevice(ip, JsonCommand);
 }
 
 bool OrchestratorCLI::Push(const String& target) {
@@ -304,7 +304,7 @@ bool OrchestratorCLI::Push(const String& target) {
             const std::string ip = dev["IP Address"].get<std::string>();
             std::fprintf(stdout, "[Push] %s — %s\r\n", mac.c_str(), ip.c_str());
 
-            const bool sent = SendToDevice(ip, JsonCommand);
+            const bool sent = PokeDevice(ip, JsonCommand);
             if (sent) ++ok; else ++fail;
         }
 
@@ -323,7 +323,7 @@ bool OrchestratorCLI::Push(const String& target) {
     const std::string ip = it.value().at("IP Address").get<std::string>();
     std::fprintf(stdout, "[Push] %s — %s\r\n", it.key().c_str(), ip.c_str());
 
-    return SendToDevice(ip, JsonCommand);
+    return PokeDevice(ip, JsonCommand);
 }
 
 bool OrchestratorCLI::readConfiguration() {
@@ -378,7 +378,7 @@ bool OrchestratorCLI::Refresh(const String& target) {
             const std::string ip = dev["IP Address"].get<std::string>();
             std::fprintf(stdout, "[Refresh] %s — %s\r\n", mac.c_str(), ip.c_str());
 
-            const bool sent = SendToDevice(ip, JsonCommand);
+            const bool sent = PokeDevice(ip, JsonCommand);
             if (sent) ++ok; else ++fail;
         }
 
@@ -397,7 +397,7 @@ bool OrchestratorCLI::Refresh(const String& target) {
     const std::string ip = it.value().at("IP Address").get<std::string>();
     std::fprintf(stdout, "[Refresh] %s — %s\r\n", it.key().c_str(), ip.c_str());
 
-    return SendToDevice(ip, JsonCommand);
+    return PokeDevice(ip, JsonCommand);
 }
 
 bool OrchestratorCLI::Restart(const String& target) {
@@ -423,7 +423,7 @@ bool OrchestratorCLI::Restart(const String& target) {
             }
 
             const std::string ip = dev["IP Address"].get<std::string>();
-            const bool sent = SendToDevice(ip, JsonCommand);
+            const bool sent = PokeDevice(ip, JsonCommand);
             if (sent) ++ok; else ++fail;
         }
         return true;
@@ -456,10 +456,10 @@ bool OrchestratorCLI::Restart(const String& target) {
 
     auto it = device.begin();
     const std::string ip = it.value().at("IP Address").get<std::string>();
-    return SendToDevice(ip, JsonCommand);
+    return PokeDevice(ip, JsonCommand);
 }
 
-bool OrchestratorCLI::SendToDevice(const std::string& destination, const nlohmann::json& payload) {
+bool OrchestratorCLI::PokeDevice(const std::string& destination, const nlohmann::json& payload) {
     if (payload.empty()) return false;
     const std::string dumped = payload.dump(-1);
 
@@ -526,7 +526,7 @@ bool OrchestratorCLI::Update(const String& target) {
             const std::string ip = dev["IP Address"].get<std::string>();
             std::fprintf(stdout, "[Update] %s — %s\r\n", mac.c_str(), ip.c_str());
 
-            const bool sent = SendToDevice(ip, JsonCommand);
+            const bool sent = PokeDevice(ip, JsonCommand);
             if (sent) ++ok; else ++fail;
         }
         return true;
@@ -563,5 +563,5 @@ bool OrchestratorCLI::Update(const String& target) {
     const std::string ip = it.value().at("IP Address").get<std::string>();
     std::fprintf(stdout, "[Update] %s — %s\r\n", it.key().c_str(), ip.c_str());
 
-    return SendToDevice(ip, JsonCommand);
+    return PokeDevice(ip, JsonCommand);
 }
