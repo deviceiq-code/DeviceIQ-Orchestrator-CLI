@@ -167,43 +167,80 @@ bool OrchestratorCLI::Initialize() {
 }
 
 void OrchestratorCLI::List(const String& target) {
-    std::fprintf(stdout, "Devices managed by this server:\r\n\r\n");
+    const bool is_specific = !(target.empty() || target.Equals("all", true) || target.Equals("managed", true) || target.Equals("unmanaged", true));
+    const bool include_managed = is_specific || target.empty() || target.Equals("all", true) || target.Equals("managed", true);
+    const bool include_unmanaged = is_specific || target.empty() || target.Equals("all", true) || target.Equals("unmanaged", true);
 
-    if (!Configuration.contains("Managed Devices") || !Configuration["Managed Devices"].is_object() ||
-        Configuration["Managed Devices"].size() == 0) {
-        std::fprintf(stdout, "No devices managed by this server.\r\n\r\n");
-        return;
-    }
+    auto limit_c = [&](const char* s, size_t n) -> String { return String(s).LimitString(n, true); };
+    
+    auto print_header = [&] {
+        std::fprintf(stdout, "%s | %s | %s | %s | %s | %s | %s\r\n",
+            limit_c("MAC Address", 17).c_str(),
+            limit_c("Hostname", 20).c_str(),
+            limit_c("IP Address", 15).c_str(),
+            limit_c("Hardware Model", 20).c_str(),
+            limit_c("Version", 7).c_str(),
+            limit_c("Last Update", 27).c_str(),
+            limit_c("Where", 17).c_str()
+        );
+    };
 
-    std::fprintf(stdout, "%s | %s | %s | %s | %s | %s\r\n",
-        String("MAC Address").LimitString(17, true).c_str(),
-        String("Hostname").LimitString(20, true).c_str(),
-        String("IP Address").LimitString(15, true).c_str(),
-        String("Hardware Model").LimitString(20, true).c_str(),
-        String("Version").LimitString(7, true).c_str(),
-        String("Last Update").LimitString(27, true).c_str()
-    );
+    auto print_row = [&](const std::string& id, const nlohmann::json& info, const char* where) {
+        const std::string hn = info.value("Hostname", std::string("Unknown"));
+        const std::string ip = info.value("IP Address", std::string("Unknown"));
+        const std::string hw = info.value("Hardware Model", std::string("Unknown"));
+        const std::string ver = info.value("Version", std::string("Unknown"));
+        const std::string lu = info.value("Last Update", std::string());
 
-    uint16_t c = 0;
-    for (const auto& [device_id, device_info] : Configuration["Managed Devices"].items()) {
-        if ((target == "") ||
-            (target.Equals(device_info.value("Hostname", std::string("Unknown")).c_str(), true)) ||
-            (target.Equals(device_info.value("IP Address", std::string("Unknown")).c_str(), true)) ||
-            (target.Equals(device_id.c_str(), true))) {
+        const String sid = String(id.c_str()).LimitString(17, true);
+        const String shn = String(hn.c_str()).LimitString(20, true);
+        const String sip = String(ip.c_str()).LimitString(15, true);
+        const String shw = String(hw.c_str()).LimitString(20, true);
+        const String svr = String(ver.c_str()).LimitString(7, true);
+        const String slu = String(lu.c_str()).LimitString(27, true);
 
-            ++c;
-            std::fprintf(stdout, "%s | %s | %s | %s | %s | %s\r\n",
-                String(device_id.c_str()).LimitString(17, true).c_str(),
-                String(device_info.value("Hostname", std::string("Unknown")).c_str()).LimitString(20, true).c_str(),
-                String(device_info.value("IP Address", std::string("Unknown")).c_str()).LimitString(15, true).c_str(),
-                String(device_info.value("Hardware Model", std::string("Unknown")).c_str()).LimitString(20, true).c_str(),
-                String(device_info.value("Version", std::string("Unknown")).c_str()).LimitString(7, true).c_str(),
-                String(device_info.value("Last Update", std::string()).c_str()).LimitString(27, true).c_str()
-            );
+        std::fprintf(stdout, "%s | %s | %s | %s | %s | %s | %s\r\n", sid.c_str(), shn.c_str(), sip.c_str(), shw.c_str(), svr.c_str(), slu.c_str(), where);
+    };
+
+    auto matches_target = [&](const std::string& id, const nlohmann::json& info) -> bool {
+        if (!is_specific) return true;
+
+        const std::string hn = info.value("Hostname",   std::string("Unknown"));
+        const std::string ip = info.value("IP Address", std::string("Unknown"));
+
+        return target.Equals(id.c_str(), true) || target.Equals(hn.c_str(), true) || target.Equals(ip.c_str(), true);
+    };
+
+    auto process_section = [&](const char* section_key, const char* where_label, bool enabled, uint16_t& counter, bool is_specific_query) {
+        if (!enabled) return;
+
+        auto it = Configuration.find(section_key);
+        if (it == Configuration.end() || !it->is_object() || it->empty()) {
+            if (!is_specific_query) {
+                if (std::strcmp(section_key, "Managed Devices") == 0) {
+                    std::fprintf(stdout, "No devices managed by this server.\r\n\r\n");
+                } else {
+                    std::fprintf(stdout, "No unmanaged devices found by this server.\r\n\r\n");
+                }
+            }
+            return;
         }
-    }
 
-    std::fprintf(stdout, "\r\n%d device%s managed.\r\n\r\n", c, (c > 1 ? "s" : ""));
+        for (const auto& [device_id, device_info] : it->items()) {
+            if (matches_target(device_id, device_info)) {
+                ++counter;
+                print_row(device_id, device_info, where_label);
+            }
+        }
+    };
+
+    print_header();
+
+    uint16_t m = 0, u = 0;
+    process_section("Managed Devices", "Managed Devices", include_managed, m, !is_specific);
+    process_section("Unmanaged Devices", "Unmanaged Devices", include_unmanaged, u, !is_specific);
+
+    std::fprintf(stdout, "\r\n%d device%s.\r\n\r\n", m + u, ((m + u) > 1 ? "s" : ""));
 }
 
 bool OrchestratorCLI::Pull(const String& target) {

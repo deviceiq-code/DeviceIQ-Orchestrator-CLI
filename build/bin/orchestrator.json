@@ -37,5 +37,15 @@
             "Version": "1.0.1"
         }
     },
-    "Unmanaged Devices": {}
+    "Unmanaged Devices": {
+        "3B:63:B5:CD:AF:13": {
+            "Hardware Model": "ESP32-WROOM",
+            "Hostname": "DEVIQ-UNK",
+            "IP Address": "192.168.2.27",
+            "Last Update": "2025-09-14T00:07:17.701329Z",
+            "Local Timestamp": "2025-09-13T21:07:16.019114Z",
+            "Product Name": "Home",
+            "Version": "1.0.1"
+        }
+    }
 }
