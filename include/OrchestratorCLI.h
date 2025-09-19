@@ -59,8 +59,9 @@ class OrchestratorCLI {
         bool Push(const String& target);
         bool Refresh(const String& target);
         bool Restart(const String& target);
-        bool PokeDevice(const std::string& destination, const nlohmann::json& payload);
         bool Update(const String& target);
+
+        bool PokeDevice(const std::string& device, const nlohmann::json& payload);
 
         nlohmann::json Configuration;
 };

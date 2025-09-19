@@ -459,7 +459,7 @@ bool OrchestratorCLI::Restart(const String& target) {
     return PokeDevice(ip, JsonCommand);
 }
 
-bool OrchestratorCLI::PokeDevice(const std::string& destination, const nlohmann::json& payload) {
+bool OrchestratorCLI::PokeDevice(const std::string& device, const nlohmann::json& payload) {
     if (payload.empty()) return false;
     const std::string dumped = payload.dump(-1);
 
@@ -492,7 +492,7 @@ bool OrchestratorCLI::PokeDevice(const std::string& destination, const nlohmann:
     std::memset(&to, 0, sizeof(to));
     to.sin_family = AF_INET;
     to.sin_port = htons(Configuration["Configuration"]["Port"].get<uint16_t>());
-    to.sin_addr.s_addr = inet_addr(destination.c_str());
+    to.sin_addr.s_addr = inet_addr(device.c_str());
 
     const ssize_t sent = sendto(socket_fd, dumped.c_str(), dumped.length(), 0, (struct sockaddr*)&to, sizeof(to));
     close(socket_fd);
