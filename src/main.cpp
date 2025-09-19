@@ -1,16 +1,7 @@
-#include <stdio.h>
-#include <iostream>
-#include <unistd.h>
-#include <getopt.h>
-#include <cstring>
-#include <algorithm>
-#include <arpa/inet.h>
-#include <nlohmann/json.hpp>
-
-#include "../include/String.h"
-#include "../include/Version.h"
-#include "../include/OrchestratorCLI.h"
-#include "../include/CommandLineParser.h"
+#include "String.h"
+#include "Version.h"
+#include "OrchestratorCLI.h"
+#include "CommandLineParser.h"
 
 OrchestratorCLI *Orchestrator;
 
