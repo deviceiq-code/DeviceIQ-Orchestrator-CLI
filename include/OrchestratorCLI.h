@@ -51,22 +51,19 @@ class OrchestratorCLI {
         bool resolveInterfaceOrIp(const std::string& ifaceOrIp, in_addr& out);
         bool sendMessage(const std::string& message, uint16_t port, const char* dest_address);
         bool setBindInterface(const std::string& ifaceOrIp);
+        bool readConfiguration();
 
     public:
-        explicit OrchestratorCLI() = default;
+        explicit OrchestratorCLI(const string &configfile);
 
-        // Accessors
         inline std::string ConfigFile() const { return mConfigFile; }
         inline void ConfigFile(const std::string& value) { mConfigFile = value; }
 
-        // Methods (alphabetical order)
         bool Discovery(const String& target);
         bool GetLog(const String& target);
-        bool Initialize();
         void List(const String& target = String());
         bool Pull(const String& target);
         bool Push(const String& target);
-        bool ReadConfiguration();
         bool Refresh(const String& target);
         bool Restart(const String& target);
         bool SendToDevice(const std::string& destination, const nlohmann::json& payload);

@@ -7,6 +7,16 @@
 #include <unistd.h>
 #include <vector>
 
+OrchestratorCLI::OrchestratorCLI(const string &configfile) : mConfigFile(configfile) {
+    if (!readConfiguration()) {
+        throw std::runtime_error("Failed to read configuration file " + configfile);
+    }
+
+    if (!setBindInterface(JSON<std::string>(Configuration["Configuration"]["Bind"], ""))) {
+        throw std::runtime_error("Failed to set bind interface");
+    }
+}
+
 const nlohmann::json OrchestratorCLI::getDevice(const String& target) {
     const std::string t = target.c_str();
 
@@ -159,17 +169,10 @@ bool OrchestratorCLI::GetLog(const String& target) {
     return true;
 }
 
-bool OrchestratorCLI::Initialize() {
-    if (Configuration.empty()) {
-        (void)ReadConfiguration();
-    }
-    return setBindInterface(JSON<std::string>(Configuration["Configuration"]["Bind"], ""));
-}
-
 void OrchestratorCLI::List(const String& target) {
-    const bool is_specific = !(target.empty() || target.Equals("all", true) || target.Equals("managed", true) || target.Equals("unmanaged", true));
-    const bool include_managed = is_specific || target.empty() || target.Equals("all", true) || target.Equals("managed", true);
-    const bool include_unmanaged = is_specific || target.empty() || target.Equals("all", true) || target.Equals("unmanaged", true);
+    const bool is_specific = !(target.Equals("all", true) || target.Equals("managed", true) || target.Equals("unmanaged", true));
+    const bool include_managed = is_specific || target.Equals("all", true) || target.Equals("managed", true);
+    const bool include_unmanaged = is_specific || target.Equals("all", true) || target.Equals("unmanaged", true);
 
     auto limit_c = [&](const char* s, size_t n) -> String { return String(s).LimitString(n, true); };
     
@@ -205,7 +208,7 @@ void OrchestratorCLI::List(const String& target) {
     auto matches_target = [&](const std::string& id, const nlohmann::json& info) -> bool {
         if (!is_specific) return true;
 
-        const std::string hn = info.value("Hostname",   std::string("Unknown"));
+        const std::string hn = info.value("Hostname", std::string("Unknown"));
         const std::string ip = info.value("IP Address", std::string("Unknown"));
 
         return target.Equals(id.c_str(), true) || target.Equals(hn.c_str(), true) || target.Equals(ip.c_str(), true);
@@ -345,7 +348,7 @@ bool OrchestratorCLI::Push(const String& target) {
     return SendToDevice(ip, JsonCommand);
 }
 
-bool OrchestratorCLI::ReadConfiguration() {
+bool OrchestratorCLI::readConfiguration() {
     if (mConfigFile.empty()) {
         char exePath[PATH_MAX];
         ssize_t count = readlink("/proc/self/exe", exePath, sizeof(exePath) - 1);

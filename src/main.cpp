@@ -17,8 +17,8 @@ using json = nlohmann::json;
 
 OrchestratorCLI *Orchestrator;
 
-string TargetInterface;
-string TargetDevice;
+string TargetDevice = "all";
+String ConfigFile = "./orchestrator.json";
 
 bool Force = false;
 bool Apply = false;
@@ -27,18 +27,16 @@ OrchestratorAction Action = ACTION_NOACTION;
 
 void ShowResult(const string &command, const bool result) {
     if (result) {
-        fprintf(stdout, "Command '%s' successfully sent to '%s'\r\n\r\n", command.c_str(), TargetDevice.c_str());
+        fprintf(stdout, "\r\nCommand '%s' successfully sent to '%s'.\r\n\r\n", command.c_str(), TargetDevice.c_str());
         exit(0);
     } else {
-        fprintf(stderr, "Failed to send '%s' command to '%s'\r\n\r\n", command.c_str(), TargetDevice.c_str());
+        fprintf(stderr, "\r\nFailed to send '%s' command to '%s'.\r\n\r\n", command.c_str(), TargetDevice.c_str());
         exit(1);
     }
 }
 
 int main(int argc, char** argv) {
     CommandLineParser clp;
-
-    Orchestrator = new OrchestratorCLI();
 
     // Parameters
 
@@ -54,7 +52,7 @@ int main(int argc, char** argv) {
 
     clp.OnParameter('c', "config", required_argument, [&](char* p_arg) {
         if (p_arg[0] == '=') p_arg = ++p_arg;
-        Orchestrator->ConfigFile(p_arg);
+        ConfigFile = String(p_arg);
     });
 
     clp.OnParameter('f', "force", no_argument, [](char* p_arg) {
@@ -63,11 +61,6 @@ int main(int argc, char** argv) {
 
     clp.OnParameter('a', "apply", no_argument, [](char* p_arg) {
         Apply = true;
-    });
-
-    clp.OnParameter('i', "interface", required_argument, [&](char* p_arg) {
-        if (p_arg[0] == '=') p_arg = ++p_arg;
-        TargetInterface = p_arg;
     });
 
     // Actions
@@ -84,11 +77,10 @@ int main(int argc, char** argv) {
 
     clp.Parse(argc, argv);
 
-    if (Orchestrator->ReadConfiguration()) {
-        if (!TargetInterface.empty()) Orchestrator->Configuration["Configuration"]["Bind"] = TargetInterface;
-        Orchestrator->Initialize();
-    } else {
-        fprintf(stdout, "Configuration file %s is invalid.\r\n\r\n", Orchestrator->ConfigFile().c_str());
+    try {
+        Orchestrator = new OrchestratorCLI(ConfigFile);
+    } catch(const std::exception& e) {
+        fprintf(stderr, "Error: %s\r\n\r\n", e.what());
         exit(1);
     }
 
