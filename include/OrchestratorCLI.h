@@ -44,8 +44,6 @@ class OrchestratorCLI {
         std::string mConfigFile = DEF_CONFIGFILE;
 
         const nlohmann::json getDevice(const String& target);
-        std::string queryIPAddress(const char* mac_address);
-        std::string queryMACAddress(const char* ip_address);
         bool resolveInterfaceOrIp(const std::string& ifaceOrIp, in_addr& out);
         bool sendMessage(const std::string& message, uint16_t port, const char* dest_address);
         bool setBindInterface(const std::string& ifaceOrIp);
@@ -53,9 +51,6 @@ class OrchestratorCLI {
 
     public:
         explicit OrchestratorCLI(const string &configfile);
-
-        inline std::string ConfigFile() const { return mConfigFile; }
-        inline void ConfigFile(const std::string& value) { mConfigFile = value; }
 
         bool Discovery(const String& target);
         bool GetLog(const String& target);

@@ -61,28 +61,6 @@ const nlohmann::json OrchestratorCLI::getDevice(const String& target) {
     return nlohmann::json::object();
 }
 
-std::string OrchestratorCLI::queryIPAddress(const char* mac_address) {
-    if (Configuration.contains("Managed Devices") && Configuration["Managed Devices"].is_object()) {
-        for (const auto& [device_id, device_info] : Configuration["Managed Devices"].items()) {
-            if (device_info.value("MAC Address", std::string()) == mac_address) {
-                return device_info.value("IP Address", std::string("IP Not Found"));
-            }
-        }
-    }
-    return "IP Not Found";
-}
-
-std::string OrchestratorCLI::queryMACAddress(const char* ip_address) {
-    if (Configuration.contains("Managed Devices") && Configuration["Managed Devices"].is_object()) {
-        for (const auto& [device_id, device_info] : Configuration["Managed Devices"].items()) {
-            if (device_info.value("IP Address", std::string()) == ip_address) {
-                return device_info.value("MAC Address", std::string("MAC Not Found"));
-            }
-        }
-    }
-    return "MAC Not Found";
-}
-
 bool OrchestratorCLI::resolveInterfaceOrIp(const std::string& ifaceOrIp, in_addr& out) {
     in_addr tmp{};
     if (inet_aton(ifaceOrIp.c_str(), &tmp)) { out = tmp; return true; }
