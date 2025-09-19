@@ -29,9 +29,7 @@ enum OrchestratorAction {
 template <typename T>
 T JSON(const nlohmann::json& jsonValue, const T& defaultValue = T()) {
     try {
-        if (jsonValue.is_null()) {
-            return defaultValue;
-        }
+        if (jsonValue.is_null()) return defaultValue;
         return jsonValue.get<T>();
     } catch (const nlohmann::json::type_error&) {
         return defaultValue;
