@@ -12,9 +12,6 @@
 #include "../include/OrchestratorCLI.h"
 #include "../include/CommandLineParser.h"
 
-using namespace std;
-using json = nlohmann::json;
-
 OrchestratorCLI *Orchestrator;
 
 string TargetDevice = "all";
