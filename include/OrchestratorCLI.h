@@ -23,7 +23,8 @@ enum OrchestratorAction {
     ACTION_LIST,
     ACTION_PULL,
     ACTION_PUSH,
-    ACTION_GETLOG
+    ACTION_GETLOG,
+    ACTION_CLEARLOG
 };
 
 template <typename T>
@@ -45,23 +46,25 @@ class OrchestratorCLI {
 
         const nlohmann::json getDevice(const String& target);
         bool resolveInterfaceOrIp(const std::string& ifaceOrIp, in_addr& out);
-        bool sendMessage(const std::string& message, uint16_t port, const char* dest_address);
+        bool sendMessage(const std::string &message, uint16_t port, const char* dest_address);
         bool setBindInterface(const std::string& ifaceOrIp);
         bool readConfiguration();
 
+        bool sendCommand(const String &target, const String &command);
+        bool pokeDevice(const std::string &device, const nlohmann::json &payload);
+
     public:
         explicit OrchestratorCLI(const string &configfile);
-
-        bool Discovery(const String& target);
-        bool GetLog(const String& target);
-        void List(const String& target = String());
-        bool Pull(const String& target);
-        bool Push(const String& target);
-        bool Refresh(const String& target);
-        bool Restart(const String& target);
-        bool Update(const String& target);
-
-        bool PokeDevice(const std::string& device, const nlohmann::json& payload);
+        
+        bool Discovery(const String &target);
+        bool GetLog(const String &target) { return sendCommand(target, "GetLog"); }
+        bool ClearLog(const String &target) { return sendCommand(target, "ClearLog"); }
+        void List(const String &target = String());
+        bool Pull(const String &target) { return sendCommand(target, "Pull"); }
+        bool Push(const String &target) { return sendCommand(target, "Push"); }
+        bool Refresh(const String &target) { return sendCommand(target, "Refresh"); }
+        bool Restart(const String &target) { return sendCommand(target, "Restart"); }
+        bool Update(const String &target) { return sendCommand(target, "Update"); }
 
         nlohmann::json Configuration;
 };

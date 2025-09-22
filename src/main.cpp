@@ -6,7 +6,7 @@
 OrchestratorCLI *Orchestrator;
 
 string TargetDevice = "all";
-String ConfigFile = "./orchestrator.json";
+String ConfigFile = "./Orchestrator.json";
 
 bool Force = false;
 bool Apply = false;
@@ -55,6 +55,7 @@ int main(int argc, char** argv) {
     clp.OnAction("add", []() { Action = ACTION_ADD; });
     clp.OnAction("discover", []() { Action = ACTION_DISCOVER; });
     clp.OnAction("getlog", []() { Action = ACTION_GETLOG; });
+    clp.OnAction("clearlog", []() { Action = ACTION_CLEARLOG; });
     clp.OnAction("list", []() { Action = ACTION_LIST; });
     clp.OnAction("pull", []() { Action = ACTION_PULL; });
     clp.OnAction("push", []() { Action = ACTION_PUSH; });
@@ -81,6 +82,9 @@ int main(int argc, char** argv) {
         } break;
         case ACTION_GETLOG : {
             ShowResult("getlog", Orchestrator->GetLog(TargetDevice));
+        } break;
+        case ACTION_CLEARLOG : {
+            ShowResult("clearlog", Orchestrator->ClearLog(TargetDevice));
         } break;
         case ACTION_LIST : {
             Orchestrator->List(TargetDevice);

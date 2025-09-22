@@ -139,12 +139,58 @@ bool OrchestratorCLI::Discovery(const String& target) {
         {"Parameter","All"},
     };
 
-    return PokeDevice(target, JsonCommand);
+    return pokeDevice(target, JsonCommand);
 }
 
-bool OrchestratorCLI::GetLog(const String& target) {
-    // TODO: implementar quando o protocolo de log estiver definido
-    return true;
+bool OrchestratorCLI::sendCommand(const String &target, const String &command) {
+    nlohmann::json JsonCommand = {
+        {"Provider", "Orchestrator"},
+        {"Server ID", Configuration["Configuration"]["Server ID"].get<std::string>()},
+        {"Command",  command},
+        {"Parameter",""}
+    };
+
+    if (target.Equals("all", true) || target.Equals("managed", true)) {
+        if (!Configuration.contains("Managed Devices") || Configuration["Managed Devices"].empty()) {
+            std::fprintf(stdout, "[%s] No devices managed\r\n", command.c_str());
+            return false;
+        }
+
+        size_t ok = 0, fail = 0, skipped = 0;
+
+        for (auto& kv : Configuration["Managed Devices"].items()) {
+            const std::string mac = kv.key();
+            const nlohmann::json& dev = kv.value();
+
+            if (!dev.contains("IP Address") || dev["IP Address"].is_null()) {
+                std::fprintf(stdout, "[%s] %s no IP Address found\r\n", command.c_str(), mac.c_str());
+                ++skipped;
+                continue;
+            }
+
+            const std::string ip = dev["IP Address"].get<std::string>();
+            std::fprintf(stdout, "[%s] %s — %s\r\n", command.c_str(), mac.c_str(), ip.c_str());
+
+            const bool sent = pokeDevice(ip, JsonCommand);
+            if (sent) ++ok; else ++fail;
+        }
+
+        std::fprintf(stdout, "[%s] Multicast finished: Sent = %s, Failed = %s, Ignored = %s\r\n", command.c_str(), std::to_string(ok).c_str(), std::to_string(fail).c_str(), std::to_string(skipped).c_str());
+
+        return ok > 0;
+    }
+
+    nlohmann::json device = getDevice(target);
+    if (device.empty()) {
+        std::fprintf(stdout, "[%s] Target device not found: %s\r\n", command.c_str(), target.c_str());
+        return false;
+    }
+
+    auto it = device.begin();
+    const std::string ip = it.value().at("IP Address").get<std::string>();
+    std::fprintf(stdout, "[%s] %s — %s\r\n", command.c_str(), it.key().c_str(), ip.c_str());
+
+    return pokeDevice(ip, JsonCommand);
 }
 
 void OrchestratorCLI::List(const String& target) {
@@ -224,108 +270,6 @@ void OrchestratorCLI::List(const String& target) {
     std::fprintf(stdout, "\r\n%d device%s.\r\n\r\n", m + u, ((m + u) > 1 ? "s" : ""));
 }
 
-bool OrchestratorCLI::Pull(const String& target) {
-    nlohmann::json JsonCommand = {
-        {"Provider", "Orchestrator"},
-        {"Server ID", Configuration["Configuration"]["Server ID"].get<std::string>()},
-        {"Command",  "Pull"},
-        {"Parameter",""}
-    };
-
-    if (target.Equals("all", true) || target.Equals("managed", true)) {
-        if (!Configuration.contains("Managed Devices") || Configuration["Managed Devices"].empty()) {
-            std::fprintf(stdout, "[Pull] No devices managed\r\n");
-            return false;
-        }
-
-        size_t ok = 0, fail = 0, skipped = 0;
-
-        for (auto& kv : Configuration["Managed Devices"].items()) {
-            const std::string mac = kv.key();
-            const nlohmann::json& dev = kv.value();
-
-            if (!dev.contains("IP Address") || dev["IP Address"].is_null()) {
-                std::fprintf(stdout, "[Pull] %s no IP Address found\r\n", mac.c_str());
-                ++skipped;
-                continue;
-            }
-
-            const std::string ip = dev["IP Address"].get<std::string>();
-            std::fprintf(stdout, "[Pull] %s — %s\r\n", mac.c_str(), ip.c_str());
-
-            const bool sent = PokeDevice(ip, JsonCommand);
-            if (sent) ++ok; else ++fail;
-        }
-
-        std::fprintf(stdout, "[Update] Multicast finished: Sent = %s, Failed = %s, Ignored = %s\r\n", std::to_string(ok).c_str(), std::to_string(fail).c_str(), std::to_string(skipped).c_str());
-
-        return ok > 0;
-    }
-
-    nlohmann::json device = getDevice(target);
-    if (device.empty()) {
-        std::fprintf(stdout, "[Pull] Target device not found: %s\r\n", target.c_str());
-        return false;
-    }
-
-    auto it = device.begin();
-    const std::string ip = it.value().at("IP Address").get<std::string>();
-    std::fprintf(stdout, "[Pull] %s — %s\r\n", it.key().c_str(), ip.c_str());
-
-    return PokeDevice(ip, JsonCommand);
-}
-
-bool OrchestratorCLI::Push(const String& target) {
-    nlohmann::json JsonCommand = {
-        {"Provider", "Orchestrator"},
-        {"Server ID", Configuration["Configuration"]["Server ID"].get<std::string>()},
-        {"Command",  "Push"},
-        {"Parameter",""}
-    };
-
-    if (target.Equals("all", true) || target.Equals("managed", true)) {
-        if (!Configuration.contains("Managed Devices") || Configuration["Managed Devices"].empty()) {
-            std::fprintf(stdout, "[Push] No devices managed\r\n");
-            return false;
-        }
-
-        size_t ok = 0, fail = 0, skipped = 0;
-
-        for (auto& kv : Configuration["Managed Devices"].items()) {
-            const std::string mac = kv.key();
-            const nlohmann::json& dev = kv.value();
-
-            if (!dev.contains("IP Address") || dev["IP Address"].is_null()) {
-                std::fprintf(stdout, "[Push] %s no IP Address found\r\n", mac.c_str());
-                ++skipped;
-                continue;
-            }
-
-            const std::string ip = dev["IP Address"].get<std::string>();
-            std::fprintf(stdout, "[Push] %s — %s\r\n", mac.c_str(), ip.c_str());
-
-            const bool sent = PokeDevice(ip, JsonCommand);
-            if (sent) ++ok; else ++fail;
-        }
-
-        std::fprintf(stdout, "[Update] Multicast finished: Sent = %s, Failed = %s, Ignored = %s\r\n", std::to_string(ok).c_str(), std::to_string(fail).c_str(), std::to_string(skipped).c_str());
-
-        return ok > 0;
-    }
-
-    nlohmann::json device = getDevice(target);
-    if (device.empty()) {
-        std::fprintf(stdout, "[Push] Target device not found: %s\r\n", target.c_str());
-        return false;
-    }
-
-    auto it = device.begin();
-    const std::string ip = it.value().at("IP Address").get<std::string>();
-    std::fprintf(stdout, "[Push] %s — %s\r\n", it.key().c_str(), ip.c_str());
-
-    return PokeDevice(ip, JsonCommand);
-}
-
 bool OrchestratorCLI::readConfiguration() {
     if (mConfigFile.empty()) {
         char exePath[PATH_MAX];
@@ -349,117 +293,7 @@ bool OrchestratorCLI::readConfiguration() {
     }
 }
 
-bool OrchestratorCLI::Refresh(const String& target) {
-    nlohmann::json JsonCommand = {
-        {"Provider", "Orchestrator"},
-        {"Server ID", Configuration["Configuration"]["Server ID"].get<std::string>()},
-        {"Command",  "Refresh"},
-        {"Parameter",""}
-    };
-
-    if (target.Equals("all", true) || target.Equals("managed", true)) {
-        if (!Configuration.contains("Managed Devices") || Configuration["Managed Devices"].empty()) {
-            std::fprintf(stdout, "[Refresh] No devices managed\r\n");
-            return false;
-        }
-
-        size_t ok = 0, fail = 0, skipped = 0;
-
-        for (auto& kv : Configuration["Managed Devices"].items()) {
-            const std::string mac = kv.key();
-            const nlohmann::json& dev = kv.value();
-
-            if (!dev.contains("IP Address") || dev["IP Address"].is_null()) {
-                std::fprintf(stdout, "[Refresh] %s no IP Address found\r\n", mac.c_str());
-                ++skipped;
-                continue;
-            }
-
-            const std::string ip = dev["IP Address"].get<std::string>();
-            std::fprintf(stdout, "[Refresh] %s — %s\r\n", mac.c_str(), ip.c_str());
-
-            const bool sent = PokeDevice(ip, JsonCommand);
-            if (sent) ++ok; else ++fail;
-        }
-
-        std::fprintf(stdout, "[Update] Multicast finished: Sent = %s, Failed = %s, Ignored = %s\r\n", std::to_string(ok).c_str(), std::to_string(fail).c_str(), std::to_string(skipped).c_str());
-
-        return ok > 0;
-    }
-
-    nlohmann::json device = getDevice(target);
-    if (device.empty()) {
-        std::fprintf(stdout, "[Refresh] Target device not found: %s\r\n", target.c_str());
-        return false;
-    }
-
-    auto it = device.begin();
-    const std::string ip = it.value().at("IP Address").get<std::string>();
-    std::fprintf(stdout, "[Refresh] %s — %s\r\n", it.key().c_str(), ip.c_str());
-
-    return PokeDevice(ip, JsonCommand);
-}
-
-bool OrchestratorCLI::Restart(const String& target) {
-    nlohmann::json JsonCommand = {
-        {"Provider", "Orchestrator"},
-        {"Server ID", Configuration["Configuration"]["Server ID"].get<std::string>()},
-        {"Command",  "Restart"},
-        {"Parameter",""}
-    };
-
-    auto send_to_group = [&](const char* section, size_t& ok, size_t& fail, size_t& skipped) -> bool {
-        if (!Configuration.contains(section) || Configuration[section].empty()) {
-            return false;
-        }
-
-        for (auto& kv : Configuration[section].items()) {
-            const std::string mac = kv.key();
-            const nlohmann::json& dev = kv.value();
-
-            if (!dev.contains("IP Address") || dev["IP Address"].is_null()) {
-                ++skipped;
-                continue;
-            }
-
-            const std::string ip = dev["IP Address"].get<std::string>();
-            const bool sent = PokeDevice(ip, JsonCommand);
-            if (sent) ++ok; else ++fail;
-        }
-        return true;
-    };
-
-    if (target.Equals("all", true) || target.Equals("managed", true) || target.Equals("unmanaged", true)) {
-        size_t ok = 0, fail = 0, skipped = 0;
-        bool any_section = false;
-
-        if (target.Equals("all", true) || target.Equals("managed", true)) {
-            any_section |= send_to_group("Managed Devices", ok, fail, skipped);
-        }
-        if (target.Equals("all", true) || target.Equals("unmanaged", true)) {
-            any_section |= send_to_group("Unmanaged Devices", ok, fail, skipped);
-        }
-
-        if (!any_section) {
-            return false;
-        }
-
-        std::fprintf(stdout, "Restart — Multicast finished: Sent = %s, Failed = %s, Ignored = %s\r\n", std::to_string(ok).c_str(), std::to_string(fail).c_str(), std::to_string(skipped).c_str());
-        return ok > 0;
-    }
-
-    nlohmann::json device = getDevice(target);
-    if (device.empty()) {
-        std::fprintf(stdout, "Restart — Target device not found: %s\r\n", target.c_str());
-        return false;
-    }
-
-    auto it = device.begin();
-    const std::string ip = it.value().at("IP Address").get<std::string>();
-    return PokeDevice(ip, JsonCommand);
-}
-
-bool OrchestratorCLI::PokeDevice(const std::string& device, const nlohmann::json& payload) {
+bool OrchestratorCLI::pokeDevice(const std::string& device, const nlohmann::json& payload) {
     if (payload.empty()) return false;
     const std::string dumped = payload.dump(-1);
 
@@ -497,71 +331,4 @@ bool OrchestratorCLI::PokeDevice(const std::string& device, const nlohmann::json
     const ssize_t sent = sendto(socket_fd, dumped.c_str(), dumped.length(), 0, (struct sockaddr*)&to, sizeof(to));
     close(socket_fd);
     return (sent >= 0);
-}
-
-bool OrchestratorCLI::Update(const String& target) {
-    nlohmann::json JsonCommand = {
-        {"Provider", "Orchestrator"},
-        {"Server ID", Configuration["Configuration"]["Server ID"].get<std::string>()},
-        {"Command",  "Update"},
-        {"Parameter",""}
-    };
-
-    auto send_to_group = [&](const char* section, size_t& ok, size_t& fail, size_t& skipped) -> bool {
-        if (!Configuration.contains(section) || Configuration[section].empty()) {
-            std::fprintf(stdout, "[Update] No devices under section: %s\r\n", section);
-            return false;
-        }
-
-        for (auto& kv : Configuration[section].items()) {
-            const std::string mac = kv.key();
-            const nlohmann::json& dev = kv.value();
-
-            if (!dev.contains("IP Address") || dev["IP Address"].is_null()) {
-                std::fprintf(stdout, "[Update] %s has no IP Address — ignored\r\n", mac.c_str());
-                ++skipped;
-                continue;
-            }
-
-            const std::string ip = dev["IP Address"].get<std::string>();
-            std::fprintf(stdout, "[Update] %s — %s\r\n", mac.c_str(), ip.c_str());
-
-            const bool sent = PokeDevice(ip, JsonCommand);
-            if (sent) ++ok; else ++fail;
-        }
-        return true;
-    };
-
-    if (target.Equals("all", true) || target.Equals("managed", true) || target.Equals("unmanaged", true)) {
-        size_t ok = 0, fail = 0, skipped = 0;
-        bool any_section = false;
-
-        if (target.Equals("all", true) || target.Equals("managed", true)) {
-            any_section |= send_to_group("Managed Devices", ok, fail, skipped);
-        }
-        if (target.Equals("all", true) || target.Equals("unmanaged", true)) {
-            any_section |= send_to_group("Unmanaged Devices", ok, fail, skipped);
-        }
-
-        if (!any_section) {
-            std::fprintf(stdout, "[Update] No devices found for requested group(s).\r\n");
-            return false;
-        }
-
-        std::fprintf(stdout, "[Update] Multicast finished: Sent = %s, Failed = %s, Ignored = %s\r\n", std::to_string(ok).c_str(), std::to_string(fail).c_str(), std::to_string(skipped).c_str());
-
-        return ok > 0;
-    }
-
-    nlohmann::json device = getDevice(target);
-    if (device.empty()) {
-        std::fprintf(stdout, "[Update] Target device not found: %s\r\n", target.c_str());
-        return false;
-    }
-
-    auto it = device.begin();
-    const std::string ip = it.value().at("IP Address").get<std::string>();
-    std::fprintf(stdout, "[Update] %s — %s\r\n", it.key().c_str(), ip.c_str());
-
-    return PokeDevice(ip, JsonCommand);
 }
