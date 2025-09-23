@@ -65,6 +65,8 @@ class OrchestratorCLI {
         bool Refresh(const String &target) { return sendCommand(target, "Refresh"); }
         bool Restart(const String &target) { return sendCommand(target, "Restart"); }
         bool Update(const String &target) { return sendCommand(target, "Update"); }
+        bool Add(const String &target) { return sendCommand(target, "Add"); }
+        bool Remove(const String &target) { return sendCommand(target, "Remove"); }
 
         nlohmann::json Configuration;
 };

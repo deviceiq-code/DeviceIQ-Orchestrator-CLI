@@ -74,43 +74,17 @@ int main(int argc, char** argv) {
     }
 
     switch (Action) {
-        case ACTION_ADD : {
-
-        } break;
-        case ACTION_DISCOVER : {
-            ShowResult("discover", Orchestrator->Discovery(TargetDevice));
-        } break;
-        case ACTION_GETLOG : {
-            ShowResult("getlog", Orchestrator->GetLog(TargetDevice));
-        } break;
-        case ACTION_CLEARLOG : {
-            ShowResult("clearlog", Orchestrator->ClearLog(TargetDevice));
-        } break;
-        case ACTION_LIST : {
-            Orchestrator->List(TargetDevice);
-        } break;
-        case ACTION_PULL : {
-            ShowResult("pull", Orchestrator->Pull(TargetDevice));
-        } break;
-        case ACTION_PUSH : {
-            ShowResult("push" , Orchestrator->Push(TargetDevice));
-        } break;
-        case ACTION_REFRESH : {
-            ShowResult("refresh", Orchestrator->Refresh(TargetDevice));
-        } break;
-        case ACTION_REMOVE : {
-
-        } break;
-        case ACTION_RESTART : {
-            ShowResult("restart", Orchestrator->Restart(TargetDevice));
-        } break;
-        case ACTION_UPDATE : {
-            ShowResult("update", Orchestrator->Update(TargetDevice));
-        } break;
-        
-        default: {
-            fprintf(stderr, "Invalid request.\r\n\r\n");
-            exit(1);
-        }
+        case ACTION_LIST :      Orchestrator->List(TargetDevice); break;
+        case ACTION_ADD :       ShowResult("Add", Orchestrator->Add(TargetDevice)); break;
+        case ACTION_DISCOVER :  ShowResult("Discover", Orchestrator->Discovery(TargetDevice)); break;
+        case ACTION_GETLOG :    ShowResult("GetLog", Orchestrator->GetLog(TargetDevice)); break;
+        case ACTION_CLEARLOG :  ShowResult("ClearLog", Orchestrator->ClearLog(TargetDevice)); break;
+        case ACTION_PULL :      ShowResult("Pull", Orchestrator->Pull(TargetDevice)); break;
+        case ACTION_PUSH :      ShowResult("Push" , Orchestrator->Push(TargetDevice)); break;
+        case ACTION_REFRESH :   ShowResult("Refresh", Orchestrator->Refresh(TargetDevice)); break;
+        case ACTION_REMOVE :    ShowResult("Remove", Orchestrator->Remove(TargetDevice)); break;
+        case ACTION_RESTART :   ShowResult("Restart", Orchestrator->Restart(TargetDevice)); break;
+        case ACTION_UPDATE :    ShowResult("Update", Orchestrator->Update(TargetDevice)); break;
+        default:                fprintf(stderr, "Invalid request.\r\n\r\n"); exit(1);
     }
 }
