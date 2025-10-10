@@ -20,6 +20,7 @@ enum OrchestratorAction {
     ACTION_REMOVE,
     ACTION_UPDATE,
     ACTION_REFRESH,
+    ACTION_RESTORE,
     ACTION_LIST,
     ACTION_PULL,
     ACTION_PUSH,
@@ -64,6 +65,7 @@ class OrchestratorCLI {
         bool Push(const String &target) { return sendCommand(target, "Push"); }
         bool Refresh(const String &target) { return sendCommand(target, "Refresh"); }
         bool Restart(const String &target) { return sendCommand(target, "Restart"); }
+        bool Restore(const String &target) { return sendCommand(target, "Restore"); }
         bool Update(const String &target) { return sendCommand(target, "Update"); }
         bool Add(const String &target) { return sendCommand(target, "Add"); }
         bool Remove(const String &target) { return sendCommand(target, "Remove"); }

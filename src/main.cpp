@@ -62,6 +62,7 @@ int main(int argc, char** argv) {
     clp.OnAction("refresh", []() { Action = ACTION_REFRESH; });
     clp.OnAction("remove", []() { Action = ACTION_REMOVE; });
     clp.OnAction("restart", []() { Action = ACTION_RESTART; });
+    clp.OnAction("restore", []() { Action = ACTION_RESTORE; });
     clp.OnAction("update", []() { Action = ACTION_UPDATE; });
 
     clp.Parse(argc, argv);
@@ -84,6 +85,7 @@ int main(int argc, char** argv) {
         case ACTION_REFRESH :   ShowResult("Refresh", Orchestrator->Refresh(TargetDevice)); break;
         case ACTION_REMOVE :    ShowResult("Remove", Orchestrator->Remove(TargetDevice)); break;
         case ACTION_RESTART :   ShowResult("Restart", Orchestrator->Restart(TargetDevice)); break;
+        case ACTION_RESTORE :   ShowResult("Restore", Orchestrator->Restore(TargetDevice)); break;
         case ACTION_UPDATE :    ShowResult("Update", Orchestrator->Update(TargetDevice)); break;
         default:                fprintf(stderr, "Invalid request.\r\n\r\n"); exit(1);
     }
